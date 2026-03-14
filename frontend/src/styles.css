@@ -1,0 +1,209 @@
+/* Page layout */
+.app {
+  max-width: 900px;
+  margin: auto;
+  padding: 40px;
+  box-sizing: border-box;
+  background: #f6f7fb;
+  min-height: 100vh;
+}
+
+.app header {
+  margin-bottom: 28px;
+}
+
+.app header h1 {
+  margin: 0;
+  font-size: 2rem;
+  font-weight: 600;
+  text-align: center;
+  color: #1a1a2e;
+}
+
+.app main {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* Section cards */
+.card {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  text-align: left;
+}
+
+.card h2 {
+  margin: 0 0 16px;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #1a1a2e;
+}
+
+/* Form styling */
+.app .field {
+  margin-bottom: 16px;
+}
+
+.app .field label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #374151;
+}
+
+.app .field input {
+  width: 100%;
+  max-width: 280px;
+  padding: 8px;
+  border-radius: 4px;
+  border: 1px solid #ddd;
+  font-size: 1rem;
+  box-sizing: border-box;
+}
+
+.app .field input:focus {
+  outline: none;
+  border-color: #0073ea;
+  box-shadow: 0 0 0 2px rgba(0, 115, 234, 0.2);
+}
+
+/* Primary button (Create Request, Generate Summary) */
+.app button,
+.card button {
+  padding: 8px 14px;
+  border-radius: 4px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  border: none;
+  cursor: pointer;
+  background: #0073ea;
+  color: white;
+}
+
+.app button:hover:not(:disabled),
+.card button:hover:not(:disabled) {
+  background: #005bb5;
+}
+
+.app button:disabled,
+.card button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Approve / Deny buttons */
+.btn-approve {
+  background: #22c55e;
+  margin-right: 8px;
+}
+
+.btn-approve:hover:not(:disabled) {
+  background: #16a34a;
+}
+
+.btn-deny {
+  background: #ef4444;
+}
+
+.btn-deny:hover:not(:disabled) {
+  background: #dc2626;
+}
+
+/* Table styling */
+.table-wrap {
+  overflow-x: auto;
+}
+
+.card table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+.card table thead {
+  background: #f1f3f7;
+}
+
+.card table th,
+.card table td {
+  padding: 10px;
+  border-bottom: 1px solid #eee;
+  text-align: left;
+}
+
+.card table th {
+  font-weight: 600;
+  color: #374151;
+}
+
+.card table .id {
+  font-family: ui-monospace, Consolas, monospace;
+  font-size: 0.8rem;
+  max-width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Status badges */
+.status {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.status-pending {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.status-approved {
+  background: #d1fae5;
+  color: #065f46;
+}
+
+.status-denied {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+/* Error and loading */
+.error {
+  color: #b91c1c;
+  font-size: 0.9rem;
+  margin: 8px 0;
+}
+
+.error.global {
+  margin-top: 16px;
+  text-align: center;
+}
+
+.loading {
+  text-align: center;
+  margin-top: 8px;
+  font-size: 0.9rem;
+  color: #6b7280;
+}
+
+/* AI summary result box */
+.summary-result {
+  margin-top: 16px;
+  padding: 15px;
+  border-radius: 6px;
+  background: #f8f9fc;
+}
+
+.summary-result p {
+  margin: 0 0 8px;
+}
+
+.summary-result p:last-child {
+  margin-bottom: 0;
+}
