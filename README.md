@@ -36,15 +36,15 @@ It was implemented as part of a technical home assignment for a Full Stack / IT 
 
 ## Features
 
-- **Create requests** – Submit new access requests with application name and requester
-- **List requests** – Retrieve all requests with status and metadata
-- **Approve or deny requests** – Update request status with an optional decision-by value
-- **AI summary** – Get a summary of pending requests (count, applications, requesters)
-- **AI request analysis** – Get a simple risk level for a request (rule-based)
-- **Validation middleware** – Request body validation for create, approve/deny, and analyze
-- **Logging middleware** – Request logging (method, URL, status, duration)
-- **Centralized error handling** – Consistent JSON error responses and 404 for unknown routes
-- **Lightweight React UI** – Create requests, view table, approve/deny, and generate AI summary
+- **Create requests** - Submit new access requests with application name and requester
+- **List requests** - Retrieve all requests with status and metadata
+- **Approve or deny requests** - Update request status with an optional decision-by value
+- **AI summary** - Get a summary of pending requests (count, applications, requesters)
+- **AI request analysis** - Get a simple risk level for a request (rule-based)
+- **Validation middleware** - Request body validation for create, approve/deny, and analyze
+- **Logging middleware** - Request logging (method, URL, status, duration)
+- **Centralized error handling** - Consistent JSON error responses and 404 for unknown routes
+- **Lightweight React UI** - Create requests, view table, approve/deny, and generate AI summary
 
 ## Project Structure
 
@@ -154,15 +154,7 @@ The UI is served by Vite (typically **http://localhost:5173**). It calls the bac
 
 ## Design Decisions
 
-- **Routes vs services** – Routes stay thin and only delegate to services; all business logic and validation rules live in the service layer.
-- **Middleware** – Validation, logging, and error handling are implemented as Express middleware for a clear pipeline and consistent behavior.
-- **In-memory storage** – Storage is in-memory by design for simplicity and to avoid database setup; the structure allows swapping in a real store later.
-- **React UI** – A small React + Vite app was added to demonstrate the full flow (create, list, approve/deny, AI summary) without extra frameworks or heavy state management.
-
-## Future Improvements
-
-- **Database persistence** – Replace in-memory store with a database (e.g. PostgreSQL, SQLite).
-- **Automated tests** – Unit tests for services and integration tests for API endpoints.
-- **Authentication** – Protect endpoints and identify users (e.g. JWT or session-based auth).
-- **API documentation** – OpenAPI/Swagger or similar for the REST API.
-- **Docker setup** – Dockerfile and optional docker-compose for backend and frontend.
+- **Routes vs services** - Routes stay thin and only delegate to services; all business logic and validation rules live in the service layer.
+- **Middleware** - Validation, logging, and error handling are implemented as Express middleware for a clear pipeline and consistent behavior.
+- **In-memory storage** - Storage is in-memory by design for simplicity and to avoid database setup; the structure allows swapping in a real store later.
+- **React UI** - A small React + Vite app was added to demonstrate the full flow (create, list, approve/deny, AI summary) without extra frameworks or heavy state management.
