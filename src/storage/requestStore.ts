@@ -26,3 +26,8 @@ export function update(id: string, partial: Partial<AccessRequest>): AccessReque
   store.set(id, updated);
   return updated;
 }
+
+/** Removes all entries from the store. Intended for use in tests only. */
+export function clearStore(): void {
+  store.clear();
+}

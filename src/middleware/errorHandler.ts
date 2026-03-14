@@ -17,6 +17,12 @@ export function errorHandler(err: unknown, _req: Request, res: Response, _next: 
     res.status(err.statusCode).json({ error: err.message });
     return;
   }
+  // body-parser and similar middleware attach a numeric status/statusCode to their errors
+  if (err instanceof Error && 'status' in err && typeof (err as Record<string, unknown>).status === 'number') {
+    const status = (err as Record<string, unknown>).status as number;
+    res.status(status).json({ error: err.message });
+    return;
+  }
   if (err instanceof Error) {
     console.error(err);
     res.status(500).json({ error: 'Internal server error' });

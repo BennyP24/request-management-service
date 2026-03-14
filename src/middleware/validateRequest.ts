@@ -5,7 +5,22 @@ function isNonEmptyString(value: unknown): value is string {
   return typeof value === 'string' && value.trim().length > 0;
 }
 
-/** Validates POST /requests body: requires non-empty application and createdBy. */
+/** Validates POST /auth/login body: requires non-empty username and password. */
+export function validateLoginBody(req: Request, _res: Response, next: NextFunction): void {
+  const body = req.body;
+  if (!body || typeof body !== 'object') {
+    throw new AppError(400, 'Request body must be a JSON object');
+  }
+  if (!isNonEmptyString(body.username)) {
+    throw new AppError(400, 'Field "username" is required and must be a non-empty string');
+  }
+  if (!isNonEmptyString(body.password)) {
+    throw new AppError(400, 'Field "password" is required and must be a non-empty string');
+  }
+  next();
+}
+
+/** Validates POST /requests body: requires non-empty application. */
 export function validateCreateRequest(req: Request, _res: Response, next: NextFunction): void {
   const body = req.body;
   if (!body || typeof body !== 'object') {
@@ -13,9 +28,6 @@ export function validateCreateRequest(req: Request, _res: Response, next: NextFu
   }
   if (!isNonEmptyString(body.application)) {
     throw new AppError(400, 'Field "application" is required and must be a non-empty string');
-  }
-  if (!isNonEmptyString(body.createdBy)) {
-    throw new AppError(400, 'Field "createdBy" is required and must be a non-empty string');
   }
   next();
 }

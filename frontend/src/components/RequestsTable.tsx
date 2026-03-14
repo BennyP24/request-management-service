@@ -5,9 +5,26 @@ import { approveRequest, denyRequest } from '../api';
 interface RequestsTableProps {
   requests: AccessRequest[];
   onRefresh: () => void;
+  filterCreatedBy?: string;
+  onFilterCreatedByChange?: (v: string) => void;
+  filterStatus?: string;
+  onFilterStatusChange?: (v: string) => void;
+  showActions?: boolean;
+  showFilters?: boolean;
+  requesterNames?: string[];
 }
 
-export function RequestsTable({ requests, onRefresh }: RequestsTableProps) {
+export function RequestsTable({
+  requests,
+  onRefresh,
+  filterCreatedBy = '',
+  onFilterCreatedByChange,
+  filterStatus = '',
+  onFilterStatusChange,
+  showActions = true,
+  showFilters = true,
+  requesterNames = [],
+}: RequestsTableProps) {
   const [loadingId, setLoadingId] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
 
@@ -40,6 +57,36 @@ export function RequestsTable({ requests, onRefresh }: RequestsTableProps) {
   return (
     <section className="card">
       <h2>Requests</h2>
+      {showFilters && (
+        <div className="filters">
+          <div className="field filter-field">
+            <label htmlFor="filterCreatedBy">Filter by requester</label>
+            <select
+              id="filterCreatedBy"
+              value={filterCreatedBy}
+              onChange={(e) => onFilterCreatedByChange?.(e.target.value)}
+            >
+              <option value="">All</option>
+              {requesterNames.map((name) => (
+                <option key={name} value={name}>{name}</option>
+              ))}
+            </select>
+          </div>
+          <div className="field filter-field">
+            <label htmlFor="filterStatus">Filter by status</label>
+            <select
+              id="filterStatus"
+              value={filterStatus}
+              onChange={(e) => onFilterStatusChange?.(e.target.value)}
+            >
+              <option value="">All</option>
+              <option value="pending">Pending</option>
+              <option value="approved">Approved</option>
+              <option value="denied">Denied</option>
+            </select>
+          </div>
+        </div>
+      )}
       {error && <p className="error">{error}</p>}
       <div className="table-wrap">
         <table>
@@ -50,13 +97,13 @@ export function RequestsTable({ requests, onRefresh }: RequestsTableProps) {
               <th>status</th>
               <th>createdBy</th>
               <th>createdAt</th>
-              <th>Actions</th>
+              {showActions && <th>Actions</th>}
             </tr>
           </thead>
           <tbody>
             {requests.length === 0 ? (
               <tr>
-                <td colSpan={6}>No requests yet.</td>
+                <td colSpan={showActions ? 6 : 5}>No requests found.</td>
               </tr>
             ) : (
               requests.map((r) => (
@@ -66,28 +113,30 @@ export function RequestsTable({ requests, onRefresh }: RequestsTableProps) {
                   <td><span className={`status status-${r.status}`}>{r.status}</span></td>
                   <td>{r.createdBy}</td>
                   <td>{new Date(r.createdAt).toLocaleString()}</td>
-                  <td>
-                    {r.status === 'pending' && (
-                      <>
-                        <button
-                          type="button"
-                          className="btn-approve"
-                          onClick={() => handleApprove(r.id)}
-                          disabled={loadingId !== null}
-                        >
-                          {loadingId === r.id ? '…' : 'Approve'}
-                        </button>
-                        <button
-                          type="button"
-                          className="btn-deny"
-                          onClick={() => handleDeny(r.id)}
-                          disabled={loadingId !== null}
-                        >
-                          {loadingId === r.id ? '…' : 'Deny'}
-                        </button>
-                      </>
-                    )}
-                  </td>
+                  {showActions && (
+                    <td>
+                      {r.status === 'pending' && (
+                        <>
+                          <button
+                            type="button"
+                            className="btn-approve"
+                            onClick={() => handleApprove(r.id)}
+                            disabled={loadingId !== null}
+                          >
+                            {loadingId === r.id ? '...' : 'Approve'}
+                          </button>
+                          <button
+                            type="button"
+                            className="btn-deny"
+                            onClick={() => handleDeny(r.id)}
+                            disabled={loadingId !== null}
+                          >
+                            {loadingId === r.id ? '...' : 'Deny'}
+                          </button>
+                        </>
+                      )}
+                    </td>
+                  )}
                 </tr>
               ))
             )}

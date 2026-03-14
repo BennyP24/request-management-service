@@ -192,6 +192,83 @@
   color: #6b7280;
 }
 
+/* Requester name label */
+.requester-name {
+  font-size: 0.9rem;
+  color: #4b5563;
+  margin-bottom: 12px;
+}
+
+/* Login page */
+.login-page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background: #f6f7fb;
+}
+
+.login-card {
+  width: 340px;
+  text-align: center;
+}
+
+.login-card .field input {
+  max-width: 100%;
+}
+
+.login-subtitle {
+  color: #6b7280;
+  margin-bottom: 20px;
+  font-size: 0.95rem;
+}
+
+/* Header bar */
+.header-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 8px;
+}
+
+.user-info {
+  font-size: 0.9rem;
+  color: #4b5563;
+}
+
+.btn-logout {
+  background: transparent;
+  color: #6b7280;
+  border: 1px solid #d1d5db;
+  font-size: 0.85rem;
+  padding: 4px 12px;
+}
+
+.btn-logout:hover:not(:disabled) {
+  background: #f3f4f6;
+  color: #1f2937;
+}
+
+/* Filters */
+.filters {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+
+.filter-field {
+  margin-bottom: 0;
+}
+
+.filter-field select {
+  padding: 8px;
+  border-radius: 4px;
+  border: 1px solid #ddd;
+  font-size: 1rem;
+}
+
 /* AI summary result box */
 .summary-result {
   margin-top: 16px;

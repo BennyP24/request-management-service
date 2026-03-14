@@ -1,13 +1,14 @@
 import { useState } from 'react';
 import { createRequest } from '../api';
+import { useAuth } from '../context/AuthContext';
 
 interface CreateRequestFormProps {
   onCreated: () => void;
 }
 
 export function CreateRequestForm({ onCreated }: CreateRequestFormProps) {
+  const { user } = useAuth();
   const [application, setApplication] = useState('');
-  const [createdBy, setCreatedBy] = useState('');
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
 
@@ -16,9 +17,8 @@ export function CreateRequestForm({ onCreated }: CreateRequestFormProps) {
     setError(null);
     setLoading(true);
     try {
-      await createRequest({ application, createdBy });
+      await createRequest({ application });
       setApplication('');
-      setCreatedBy('');
       onCreated();
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to create request');
@@ -30,6 +30,7 @@ export function CreateRequestForm({ onCreated }: CreateRequestFormProps) {
   return (
     <section className="card">
       <h2>Create Request</h2>
+      <p className="requester-name">Requesting as: <strong>{user?.username}</strong></p>
       <form onSubmit={handleSubmit}>
         <div className="field">
           <label htmlFor="application">Application</label>
@@ -40,18 +41,9 @@ export function CreateRequestForm({ onCreated }: CreateRequestFormProps) {
             required
           />
         </div>
-        <div className="field">
-          <label htmlFor="createdBy">Created By</label>
-          <input
-            id="createdBy"
-            value={createdBy}
-            onChange={(e) => setCreatedBy(e.target.value)}
-            required
-          />
-        </div>
         {error && <p className="error">{error}</p>}
         <button type="submit" disabled={loading}>
-          {loading ? 'Creating…' : 'Create Request'}
+          {loading ? 'Creating...' : 'Create Request'}
         </button>
       </form>
     </section>

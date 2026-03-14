@@ -1,12 +1,12 @@
 import { Router, Request, Response } from 'express';
 import * as requestService from '../services/requestService';
 import * as aiService from '../services/aiService';
-import { validateAnalyzeBody } from '../middleware';
-import { AppError } from '../middleware';
+import { authenticate, authorize, validateAnalyzeBody, AppError } from '../middleware';
 import { AccessRequest } from '../models';
 
-/** Routes for AI summary (GET) and request risk analysis (POST). */
 const router = Router();
+
+router.use(authenticate, authorize('approver'));
 
 router.get('/summary', (_req: Request, res: Response) => {
   const pending = requestService.getPendingRequests();

@@ -4,6 +4,7 @@ export interface AccessRequest {
   id: string;
   application: string;
   status: RequestStatus;
+  requesterId: string;
   createdBy: string;
   createdAt: string;
   decisionBy: string | null;
@@ -12,5 +13,4 @@ export interface AccessRequest {
 
 export interface CreateRequestInput {
   application: string;
-  createdBy: string;
 }
