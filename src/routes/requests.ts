@@ -2,6 +2,7 @@ import { Router, Request, Response } from 'express';
 import * as requestService from '../services/requestService';
 import { validateCreateRequest, validateDecisionBody } from '../middleware';
 
+/** Routes for creating, listing, approving, and denying access requests. */
 const router = Router();
 
 router.post('/', validateCreateRequest, (req: Request, res: Response) => {

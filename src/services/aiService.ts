@@ -8,6 +8,7 @@ export interface SummaryResult {
   createdBy: string[];
 }
 
+/** Builds a text summary and unique lists of applications and requesters from the given requests. */
 export function summarize(requests: AccessRequest[]): SummaryResult {
   const totalPending = requests.length;
   const applications = [...new Set(requests.map((r) => r.application))];

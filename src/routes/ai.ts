@@ -5,6 +5,7 @@ import { validateAnalyzeBody } from '../middleware';
 import { AppError } from '../middleware';
 import { AccessRequest } from '../models';
 
+/** Routes for AI summary (GET) and request risk analysis (POST). */
 const router = Router();
 
 router.get('/summary', (_req: Request, res: Response) => {

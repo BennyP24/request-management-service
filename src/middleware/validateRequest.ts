@@ -5,6 +5,7 @@ function isNonEmptyString(value: unknown): value is string {
   return typeof value === 'string' && value.trim().length > 0;
 }
 
+/** Validates POST /requests body: requires non-empty application and createdBy. */
 export function validateCreateRequest(req: Request, _res: Response, next: NextFunction): void {
   const body = req.body;
   if (!body || typeof body !== 'object') {
@@ -19,6 +20,7 @@ export function validateCreateRequest(req: Request, _res: Response, next: NextFu
   next();
 }
 
+/** Validates approve/deny body: if present, body must be object and decisionBy must be non-empty string. */
 export function validateDecisionBody(req: Request, _res: Response, next: NextFunction): void {
   const body = req.body;
   if (body !== undefined && (body === null || typeof body !== 'object')) {
@@ -30,6 +32,7 @@ export function validateDecisionBody(req: Request, _res: Response, next: NextFun
   next();
 }
 
+/** Validates POST /ai/analyze body: requires either requestId or request object. */
 export function validateAnalyzeBody(req: Request, _res: Response, next: NextFunction): void {
   const body = req.body;
   if (!body || typeof body !== 'object') {
